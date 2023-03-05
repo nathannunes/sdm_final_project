@@ -1,5 +1,7 @@
 package com.CU.CurriculumPathTracker.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.OrderBy;
 import org.springframework.security.core.GrantedAuthority;
 
 import jakarta.persistence.Entity;
@@ -20,6 +22,7 @@ public class Authority implements GrantedAuthority{
 	private long id;
 	private String authority;
 	@ManyToOne(optional=false)
+	@JsonIgnore
 	private User user;
 	public long getId() {
 		return id;

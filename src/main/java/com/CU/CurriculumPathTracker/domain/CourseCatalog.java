@@ -7,10 +7,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "course_catalog")
@@ -28,18 +30,18 @@ public class CourseCatalog {
 
     @Column(name = "course_description")
     private String courseDescription;
+
     private String concentration;
 
     @Column(name = "offer_date")
     private Date offerDate;
 
     @Column(name = "prerequisites")
-    @ElementCollection
-    private ArrayList<String> prerequisites;
+    private String prerequisites;
 
 
     public CourseCatalog(String code, String name, Integer creditHours, String courseDescription,
-                         String concentration, Date offerDate, ArrayList<String> prerequisites) {
+                         String concentration, Date offerDate, String prerequisites) {
         this.code = code;
         this.name = name;
         this.creditHours = creditHours;
@@ -108,11 +110,11 @@ public class CourseCatalog {
         this.concentration = concentration;
     }
 
-    public ArrayList<String> getPrerequisites() {
+    public String getPrerequisites() {
         return prerequisites;
     }
 
-    public void setPrerequisites(ArrayList<String> prerequisites) {
+    public void setPrerequisites(String prerequisites) {
         this.prerequisites = prerequisites;
     }
 
