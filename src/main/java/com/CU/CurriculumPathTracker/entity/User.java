@@ -1,4 +1,4 @@
-package com.CU.CurriculumPathTracker.domain;
+package com.CU.CurriculumPathTracker.entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class User implements UserDetails{
 	
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="user")
 	@JsonIgnore
-	private List<Authority> authorities;
+	public List<Authority> authorities;
 	public List<Authority> getRole() {
 		return authorities;
 	}

@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.CU.CurriculumPathTracker.domain.UserRepository;
+import com.CU.CurriculumPathTracker.repository.UserRepository;
 
 @Configuration
 public class ApplicationConfig {

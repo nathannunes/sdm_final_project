@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.CU.CurriculumPathTracker.domain.User;
+import com.CU.CurriculumPathTracker.entity.User;
 
 import io.jsonwebtoken.ExpiredJwtException;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/soc/auth")
 public class AuthenticationController {
 	private final AuthenticateService service;
 	@Autowired
