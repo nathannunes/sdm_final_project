@@ -1,6 +1,6 @@
 package com.CU.CurriculumPathTracker.auth;
 
-import com.CU.CurriculumPathTracker.domain.User;
+import com.CU.CurriculumPathTracker.entity.User;
 
 public class AuthenticationResponse {
 
