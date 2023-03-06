@@ -1,5 +1,8 @@
-package com.CU.CurriculumPathTracker.auth;
+package com.CU.CurriculumPathTracker.services;
 
+import com.CU.CurriculumPathTracker.auth.AuthenticationRequest;
+import com.CU.CurriculumPathTracker.auth.AuthenticationResponse;
+import com.CU.CurriculumPathTracker.auth.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

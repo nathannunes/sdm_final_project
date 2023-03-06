@@ -1,5 +1,6 @@
-package com.CU.CurriculumPathTracker.domain;
+package com.CU.CurriculumPathTracker.repository;
 
+import com.CU.CurriculumPathTracker.entity.CourseCatalog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
