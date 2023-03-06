@@ -1,4 +1,4 @@
-package com.CU.CurriculumPathTracker.domain;
+package com.CU.CurriculumPathTracker.entity;
 
 
 import jakarta.persistence.Column;

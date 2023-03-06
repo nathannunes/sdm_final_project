@@ -1,11 +1,11 @@
-package com.CU.CurriculumPathTracker.auth;
+package com.CU.CurriculumPathTracker.services;
 
 
-import com.CU.CurriculumPathTracker.domain.Course;
-import com.CU.CurriculumPathTracker.domain.CourseCatalog;
-import com.CU.CurriculumPathTracker.domain.CourseCatalogRepository;
-import com.CU.CurriculumPathTracker.domain.Courses;
-import com.CU.CurriculumPathTracker.domain.Subjects;
+import com.CU.CurriculumPathTracker.entity.Course;
+import com.CU.CurriculumPathTracker.entity.CourseCatalog;
+import com.CU.CurriculumPathTracker.repository.CourseCatalogRepository;
+import com.CU.CurriculumPathTracker.entity.Courses;
+import com.CU.CurriculumPathTracker.entity.Subjects;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
