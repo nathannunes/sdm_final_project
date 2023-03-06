@@ -7,11 +7,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.CU.CurriculumPathTracker.config.JWTService;
-import com.CU.CurriculumPathTracker.domain.Authority;
-import com.CU.CurriculumPathTracker.domain.AuthorityRepository;
-import com.CU.CurriculumPathTracker.domain.Role;
-import com.CU.CurriculumPathTracker.domain.User;
-import com.CU.CurriculumPathTracker.domain.UserRepository;
+import com.CU.CurriculumPathTracker.entity.Authority;
+import com.CU.CurriculumPathTracker.entity.Role;
+import com.CU.CurriculumPathTracker.entity.User;
+import com.CU.CurriculumPathTracker.repository.AuthorityRepository;
+import com.CU.CurriculumPathTracker.repository.UserRepository;
 
 @Service
 public class AuthenticateService {

@@ -1,7 +1,6 @@
-package com.CU.CurriculumPathTracker.domain;
+package com.CU.CurriculumPathTracker.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.OrderBy;
 import org.springframework.security.core.GrantedAuthority;
 
 import jakarta.persistence.Entity;
