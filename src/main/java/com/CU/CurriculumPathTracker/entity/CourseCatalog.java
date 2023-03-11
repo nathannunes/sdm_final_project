@@ -2,6 +2,7 @@ package com.CU.CurriculumPathTracker.entity;
 
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "course_catalog")
@@ -26,18 +28,18 @@ public class CourseCatalog {
 
     @Column(name = "course_description")
     private String courseDescription;
-
     private String concentration;
 
     @Column(name = "offer_date")
     private Date offerDate;
 
     @Column(name = "prerequisites")
-    private String prerequisites;
+    @ElementCollection
+    private List<String> prerequisites;
 
 
     public CourseCatalog(String code, String name, Integer creditHours, String courseDescription,
-                         String concentration, Date offerDate, String prerequisites) {
+                         String concentration, Date offerDate, List<String> prerequisites) {
         this.code = code;
         this.name = name;
         this.creditHours = creditHours;
@@ -106,11 +108,11 @@ public class CourseCatalog {
         this.concentration = concentration;
     }
 
-    public String getPrerequisites() {
+    public List<String> getPrerequisites() {
         return prerequisites;
     }
 
-    public void setPrerequisites(String prerequisites) {
+    public void setPrerequisites(List<String> prerequisites) {
         this.prerequisites = prerequisites;
     }
 
