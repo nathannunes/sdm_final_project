@@ -1,8 +1,11 @@
 package com.CU.CurriculumPathTracker.services;
 
+import com.CU.CurriculumPathTracker.entity.Course;
 import com.CU.CurriculumPathTracker.entity.CourseCatalog;
+import com.CU.CurriculumPathTracker.entity.Courses;
 import com.CU.CurriculumPathTracker.repository.CourseCatalogRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,14 +46,16 @@ class CourseCatalogServiceTest {
         JSONArray jsonArray = new JSONArray();
         jsonArray.put("[\"2023\"]");
         jsonArray.put("[\"FALL\"]");
+        jsonArray.put("['CS100']");
+        jsonArray.put("['CS101']");
         String prerequisites = "CS100";
 
 
         List<CourseCatalog> courses = new ArrayList<>();
         CourseCatalog course1 = new CourseCatalog(code, name, creditHours, courseDescription,
-                                concentration, jsonArray.get(0).toString(), prerequisites,jsonArray.get(1).toString());
+                                concentration, jsonArray.get(0).toString(), jsonArray.get(2).toString(),jsonArray.get(1).toString());
         CourseCatalog course2 = new CourseCatalog(code2, name2, creditHours, courseDescription,
-                concentration, jsonArray.get(0).toString(), code,jsonArray.get(1).toString());
+                concentration, jsonArray.get(0).toString(), jsonArray.get(3).toString(),jsonArray.get(1).toString());
         courses.add(course1);
         courses.add(course2);
 
@@ -59,8 +64,8 @@ class CourseCatalogServiceTest {
         String expectedJson = "{\"level\":\"grad\"," +
                 "\"courses\":[{\"concentration\":\"Computer Science\"," +
                 "\"subjectsList\":[{\"code\":\"CS101\",\"name\":\"Introduction to Computer Science\"," +
-                "\"prequisites\":\"CS100\"},{\"code\":\"CS201\",\"name\":\"Intermediate CS\"," +
-                "\"prequisites\":\"CS101\"}]}]}";
+                "\"prequisites\":\"['CS100']\"},{\"code\":\"CS201\",\"name\":\"Intermediate CS\"," +
+                "\"prequisites\":\"['CS101']\"}]}]}";
 
         assertEquals(expectedJson, coursesService.getAll());
     }

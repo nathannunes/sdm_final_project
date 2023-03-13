@@ -1,6 +1,9 @@
 package com.CU.CurriculumPathTracker.entity;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -59,7 +62,8 @@ public class CourseCatalog {
     public CourseCatalog() {}
 
     public String getOfferDate() {
-        return offerDate;
+
+        return offerDate!=null?offerDate:"null";
     }
 
     public void setOfferDate(String offerDate) {
@@ -68,7 +72,8 @@ public class CourseCatalog {
 
 
     public Long getCourseNumber() {
-        return courseNumber;
+
+        return courseNumber!=null?courseNumber:0;
     }
 
     public void setCourseNumber(Long courseNumber) {
@@ -76,7 +81,8 @@ public class CourseCatalog {
     }
 
     public String getCode() {
-        return code;
+
+        return code!=null?code:"null";
     }
 
     public void setCode(String code) {
@@ -84,7 +90,7 @@ public class CourseCatalog {
     }
 
     public String getCourseSemester() {
-        return courseSemester;
+        return courseSemester!=null?courseSemester:"null";
     }
 
     public void setCourseSemester(String courseSemester) {
@@ -93,7 +99,8 @@ public class CourseCatalog {
 
 
     public String getName() {
-        return name;
+
+        return name!=null?name:"null";
     }
 
     public void setName(String name) {
@@ -101,7 +108,8 @@ public class CourseCatalog {
     }
 
     public Integer getCreditHours() {
-        return creditHours;
+
+        return creditHours!=null?creditHours:0;
     }
 
     public void setCreditHours(Integer creditHours) {
@@ -109,7 +117,8 @@ public class CourseCatalog {
     }
 
     public String getCourseDescription() {
-        return courseDescription;
+
+        return courseDescription!=null?courseDescription:"null";
     }
 
     public void setCourseDescription(String courseDescription) {
@@ -117,15 +126,16 @@ public class CourseCatalog {
     }
 
     public String getConcentration() {
-        return concentration;
+
+        return concentration!=null?concentration:"null";
     }
 
     public void setConcentration(String concentration) {
         this.concentration = concentration;
     }
 
-    public String getPrerequisites() {
-        return prerequisites;
+    public String getPrerequisites() throws JsonProcessingException {
+        return prerequisites!=null?prerequisites:"null";
     }
 
     public void setPrerequisites(String prerequisites) {
