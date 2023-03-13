@@ -3,6 +3,7 @@ package com.CU.CurriculumPathTracker.services;
 import com.CU.CurriculumPathTracker.entity.CourseCatalog;
 import com.CU.CurriculumPathTracker.repository.CourseCatalogRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.json.JSONArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -17,6 +18,7 @@ import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CourseCatalogServiceTest {
+
 
     @Mock
     private CourseCatalogRepository courseCatalogRepository;
@@ -38,15 +40,17 @@ class CourseCatalogServiceTest {
         Integer creditHours = 3;
         String courseDescription = "An introduction to computer science";
         String concentration = "Computer Science";
-        Date offerDate = new Date();
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put("[\"2023\"]");
+        jsonArray.put("[\"FALL\"]");
         String prerequisites = "CS100";
 
 
         List<CourseCatalog> courses = new ArrayList<>();
         CourseCatalog course1 = new CourseCatalog(code, name, creditHours, courseDescription,
-                                concentration, offerDate, prerequisites);
+                                concentration, jsonArray.get(0).toString(), prerequisites,jsonArray.get(1).toString());
         CourseCatalog course2 = new CourseCatalog(code2, name2, creditHours, courseDescription,
-                concentration, offerDate, code);
+                concentration, jsonArray.get(0).toString(), code,jsonArray.get(1).toString());
         courses.add(course1);
         courses.add(course2);
 
@@ -60,4 +64,6 @@ class CourseCatalogServiceTest {
 
         assertEquals(expectedJson, coursesService.getAll());
     }
+
+
 }

@@ -1,12 +1,14 @@
 package com.CU.CurriculumPathTracker.entity;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
 
 import java.util.Date;
 
@@ -29,15 +31,21 @@ public class CourseCatalog {
 
     private String concentration;
 
-    @Column(name = "offer_date")
-    private Date offerDate;
+    @Column(name = "offer_date",columnDefinition = "json")
+    @JsonDeserialize
+    private String offerDate;
 
     @Column(name = "prerequisites")
+    @JsonDeserialize
     private String prerequisites;
 
 
+    @Column(name = "course_semester",columnDefinition = "json")
+    @JsonDeserialize
+    private String courseSemester;
+
     public CourseCatalog(String code, String name, Integer creditHours, String courseDescription,
-                         String concentration, Date offerDate, String prerequisites) {
+                         String concentration, String offerDate, String prerequisites, String courseSemester) {
         this.code = code;
         this.name = name;
         this.creditHours = creditHours;
@@ -45,15 +53,16 @@ public class CourseCatalog {
         this.concentration = concentration;
         this.offerDate = offerDate;
         this.prerequisites = prerequisites;
+        this.courseSemester = courseSemester;
     }
 
     public CourseCatalog() {}
 
-    public Date getOfferDate() {
+    public String getOfferDate() {
         return offerDate;
     }
 
-    public void setOfferDate(Date offerDate) {
+    public void setOfferDate(String offerDate) {
         this.offerDate = offerDate;
     }
 
@@ -73,6 +82,15 @@ public class CourseCatalog {
     public void setCode(String code) {
         this.code = code;
     }
+
+    public String getCourseSemester() {
+        return courseSemester;
+    }
+
+    public void setCourseSemester(String courseSemester) {
+        this.courseSemester = courseSemester;
+    }
+
 
     public String getName() {
         return name;
