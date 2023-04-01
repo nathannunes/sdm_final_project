@@ -5,6 +5,7 @@ import com.CU.CurriculumPathTracker.enums.StudentType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -18,7 +19,7 @@ private String name;
 private CurriculumMaster degree;
 @Enumerated(EnumType.STRING)
 private StudentType studentType;
-@ManyToOne
+@ManyToOne(fetch = FetchType.EAGER)
 private PlansOfStudy studyPlan;
 public String getStudentCUId() {
 	return studentCUId;
