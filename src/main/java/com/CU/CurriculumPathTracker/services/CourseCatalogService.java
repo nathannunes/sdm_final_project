@@ -1,6 +1,7 @@
 package com.CU.CurriculumPathTracker.services;
 
 
+import com.CU.CurriculumPathTracker.entity.Concentrations;
 import com.CU.CurriculumPathTracker.entity.Course;
 import com.CU.CurriculumPathTracker.entity.CourseCatalog;
 import com.CU.CurriculumPathTracker.repository.CourseCatalogRepository;
@@ -8,12 +9,15 @@ import com.CU.CurriculumPathTracker.entity.Courses;
 import com.CU.CurriculumPathTracker.entity.Subjects;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -39,13 +43,13 @@ public class CourseCatalogService {
 
         for(CourseCatalog course : allCourses){
             ArrayList<Subjects> subjectsList = new ArrayList<>();
-            String conc = course.getConcentration();
-            if(courseMap.containsKey(conc)){
-                ArrayList<Subjects> updateMapList = courseMap.get(conc);
+            String concentration = course.getConcentration();
+            if(courseMap.containsKey(concentration)){
+                ArrayList<Subjects> updateMapList = courseMap.get(concentration);
                 updateMapList.add(new Subjects(course.getCode(), course.getName(), course.getPrerequisites()));
             }else{
                 subjectsList.add(new Subjects(course.getCode(), course.getName(), course.getPrerequisites()));
-                courseMap.put(conc, subjectsList);
+                courseMap.put(concentration, subjectsList);
             }
 
         }
@@ -60,5 +64,48 @@ public class CourseCatalogService {
         return jsonString;
     }
 
+    public CourseCatalog postNewCourse(Map<String,String> inputJson) throws ParseException, JsonProcessingException {
+        //  null check
+        String concentrations = null;
+        JSONArray jsonArray = new JSONArray();
+        if (inputJson.get("offerDate") != null && !inputJson.get("offerDate").isEmpty()) {
+            //dates = objectMapper.writeValueAsString(inputJson.get("offerDate"));
+            jsonArray.put(inputJson.get("offerDate"));
+        }else{
+            jsonArray.put("null");
+        }
+        if (inputJson.get("prerequisites") != null && !inputJson.get("prerequisites").isEmpty()) {
+            //dates = objectMapper.writeValueAsString(inputJson.get("offerDate"));
+            jsonArray.put(inputJson.get("prerequisites"));
+        }else{
+            jsonArray.put("null");
+        }
+        if (inputJson.get("courseSemester") != null && !inputJson.get("courseSemester").isEmpty()) {
+            //dates = objectMapper.writeValueAsString(inputJson.get("offerDate"));
+            jsonArray.put(inputJson.get("courseSemester"));
+        }else{
+            jsonArray.put("null");
+        }
+
+        // TODO valid concentration
+        for(Concentrations concentration : Concentrations.values()){
+            if(inputJson.get("concentration")!=null &&
+                    concentration.name().equalsIgnoreCase(inputJson.get("concentration"))){
+                concentrations = concentration.getValue();
+            }else{
+                System.out.println(concentration +"  " + inputJson.get("concentration"));
+            }
+        }
+
+        CourseCatalog newCourse = new CourseCatalog(inputJson.get("code"), inputJson.get("name"),
+                Integer.parseInt(inputJson.get("creditHours")), inputJson.get("courseDescription"),
+                concentrations,
+                jsonArray.get(0).toString(), jsonArray.get(1).toString(),
+                jsonArray.get(2).toString());
+
+        System.out.println(jsonArray.get(0).toString());
+        courseCatalogRepository.save(newCourse);
+        return newCourse;
+    }
 
 }

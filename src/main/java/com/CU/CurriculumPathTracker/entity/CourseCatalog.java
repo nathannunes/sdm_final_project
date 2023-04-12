@@ -1,6 +1,10 @@
 package com.CU.CurriculumPathTracker.entity;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -8,8 +12,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
 
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -30,16 +36,22 @@ public class CourseCatalog {
     private String courseDescription;
     private String concentration;
 
-    @Column(name = "offer_date")
-    private Date offerDate;
+    @Column(name = "offer_date",columnDefinition = "json")
+    @JsonDeserialize
+    private String offerDate;
 
     @Column(name = "prerequisites")
-    @ElementCollection
-    private List<String> prerequisites;
+    @JsonDeserialize
+    private String prerequisites;
 
+
+    @Column(name = "course_semester",columnDefinition = "json")
+    @JsonDeserialize
+    private String courseSemester;
 
     public CourseCatalog(String code, String name, Integer creditHours, String courseDescription,
-                         String concentration, Date offerDate, List<String> prerequisites) {
+                         String concentration, String offerDate, String prerequisites, String courseSemester) {
+
         this.code = code;
         this.name = name;
         this.creditHours = creditHours;
@@ -47,21 +59,24 @@ public class CourseCatalog {
         this.concentration = concentration;
         this.offerDate = offerDate;
         this.prerequisites = prerequisites;
+        this.courseSemester = courseSemester;
     }
 
     public CourseCatalog() {}
 
-    public Date getOfferDate() {
-        return offerDate;
+    public String getOfferDate() {
+
+        return offerDate!=null?offerDate:"null";
     }
 
-    public void setOfferDate(Date offerDate) {
+    public void setOfferDate(String offerDate) {
         this.offerDate = offerDate;
     }
 
 
     public Long getCourseNumber() {
-        return courseNumber;
+
+        return courseNumber!=null?courseNumber:0;
     }
 
     public void setCourseNumber(Long courseNumber) {
@@ -69,15 +84,26 @@ public class CourseCatalog {
     }
 
     public String getCode() {
-        return code;
+
+        return code!=null?code:"null";
     }
 
     public void setCode(String code) {
         this.code = code;
     }
 
+    public String getCourseSemester() {
+        return courseSemester!=null?courseSemester:"null";
+    }
+
+    public void setCourseSemester(String courseSemester) {
+        this.courseSemester = courseSemester;
+    }
+
+
     public String getName() {
-        return name;
+
+        return name!=null?name:"null";
     }
 
     public void setName(String name) {
@@ -85,7 +111,8 @@ public class CourseCatalog {
     }
 
     public Integer getCreditHours() {
-        return creditHours;
+
+        return creditHours!=null?creditHours:0;
     }
 
     public void setCreditHours(Integer creditHours) {
@@ -93,7 +120,8 @@ public class CourseCatalog {
     }
 
     public String getCourseDescription() {
-        return courseDescription;
+
+        return courseDescription!=null?courseDescription:"null";
     }
 
     public void setCourseDescription(String courseDescription) {
@@ -101,15 +129,16 @@ public class CourseCatalog {
     }
 
     public String getConcentration() {
-        return concentration;
+
+        return concentration!=null?concentration:"null";
     }
 
     public void setConcentration(String concentration) {
         this.concentration = concentration;
     }
 
-    public List<String> getPrerequisites() {
-        return prerequisites;
+    public String getPrerequisites() throws JsonProcessingException {
+        return prerequisites!=null?prerequisites:"null";
     }
 
     public void setPrerequisites(List<String> prerequisites) {
