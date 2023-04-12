@@ -27,7 +27,6 @@ public class CourseCatalogService {
     @Autowired
     private final CourseCatalogRepository courseCatalogRepository;
 
-    private final HashMap<String, ArrayList<Subjects>>courseMap = new HashMap<>();
 
     public CourseCatalogService(CourseCatalogRepository courseCatalogRepository) {
         this.courseCatalogRepository = courseCatalogRepository;
@@ -35,7 +34,7 @@ public class CourseCatalogService {
 
 
     public String getAll() throws JsonProcessingException {
-
+        HashMap<String, ArrayList<Subjects>>courseMap = new HashMap<>();
 
         List<Course> courseList = new ArrayList<>();
         Courses courses = new Courses();
@@ -61,8 +60,7 @@ public class CourseCatalogService {
         //Creating the ObjectMapper object
         ObjectMapper mapper = new ObjectMapper();
         //Converting the Object to JSONString
-        String jsonString = mapper.writeValueAsString(courses);
-        return jsonString;
+        return mapper.writeValueAsString(courses);
     }
 
     public CourseCatalog postNewCourse(Map<String,String> inputJson) throws ParseException, JsonProcessingException {
