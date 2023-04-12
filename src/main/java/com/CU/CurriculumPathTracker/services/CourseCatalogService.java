@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,9 +47,9 @@ public class CourseCatalogService {
             String concentration = course.getConcentration();
             if(courseMap.containsKey(concentration)){
                 ArrayList<Subjects> updateMapList = courseMap.get(concentration);
-                updateMapList.add(new Subjects(course.getCode(), course.getName(), course.getPrerequisites()));
+                updateMapList.add(new Subjects(course.getCode(), course.getName(), Collections.singletonList(course.getPrerequisites())));
             }else{
-                subjectsList.add(new Subjects(course.getCode(), course.getName(), course.getPrerequisites()));
+                subjectsList.add(new Subjects(course.getCode(), course.getName(), Collections.singletonList(course.getPrerequisites())));
                 courseMap.put(concentration, subjectsList);
             }
 

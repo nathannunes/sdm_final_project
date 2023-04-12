@@ -141,7 +141,7 @@ public class CourseCatalog {
         return prerequisites!=null?prerequisites:"null";
     }
 
-    public void setPrerequisites(List<String> prerequisites) {
+    public void setPrerequisites(String prerequisites) {
         this.prerequisites = prerequisites;
     }
 
