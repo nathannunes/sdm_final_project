@@ -1,6 +1,5 @@
 package com.CU.CurriculumPathTracker.entity;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -33,11 +32,8 @@ public class User implements UserDetails{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	//@Column
 	private String username;
-	//@Column
 	private String password;
-	//@Enumerated(EnumType.STRING)
 	
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="user")
 	@JsonIgnore
@@ -77,22 +73,18 @@ public class User implements UserDetails{
 	}
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	

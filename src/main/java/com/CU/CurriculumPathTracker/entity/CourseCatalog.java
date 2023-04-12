@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,7 +14,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
 
+
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "course_catalog")
@@ -31,7 +34,6 @@ public class CourseCatalog {
 
     @Column(name = "course_description")
     private String courseDescription;
-
     private String concentration;
 
     @Column(name = "offer_date",columnDefinition = "json")
@@ -49,6 +51,7 @@ public class CourseCatalog {
 
     public CourseCatalog(String code, String name, Integer creditHours, String courseDescription,
                          String concentration, String offerDate, String prerequisites, String courseSemester) {
+
         this.code = code;
         this.name = name;
         this.creditHours = creditHours;
@@ -138,7 +141,7 @@ public class CourseCatalog {
         return prerequisites!=null?prerequisites:"null";
     }
 
-    public void setPrerequisites(String prerequisites) {
+    public void setPrerequisites(List<String> prerequisites) {
         this.prerequisites = prerequisites;
     }
 
