@@ -64,8 +64,8 @@ class CourseCatalogServiceTest {
         String expectedJson = "{\"level\":\"grad\"," +
                 "\"courses\":[{\"concentration\":\"Computer Science\"," +
                 "\"subjectsList\":[{\"code\":\"CS101\",\"name\":\"Introduction to Computer Science\"," +
-                "\"prequisites\":\"['CS100']\"},{\"code\":\"CS201\",\"name\":\"Intermediate CS\"," +
-                "\"prequisites\":\"['CS101']\"}]}]}";
+                "\"prequisites\":[\"['CS100']\"]},{\"code\":\"CS201\",\"name\":\"Intermediate CS\"," +
+                "\"prequisites\":[\"['CS101']\"]}]}]}";
 
         assertEquals(expectedJson, coursesService.getAll());
     }

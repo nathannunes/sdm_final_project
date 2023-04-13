@@ -14,6 +14,9 @@ public class PlansOfStudy {
 @Id
 @GeneratedValue(strategy=GenerationType.IDENTITY)
 private Integer id;
+public void setId(Integer id) {
+	this.id = id;
+}
 @ManyToOne(fetch = FetchType.EAGER)
 private AcademicAdvisor advisor;
 @ElementCollection
@@ -40,4 +43,8 @@ public PlansOfStudy(AcademicAdvisor advisor,List<CourseCatalog> courses) {
 	
 }
 public PlansOfStudy() {}
+@Override
+public String toString() {
+	return "PlansOfStudy [id=" + id + ", advisor=" + advisor + ", courses=" + courses + "]";
+}
 }
