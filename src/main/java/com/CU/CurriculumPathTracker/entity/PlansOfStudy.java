@@ -40,4 +40,8 @@ public PlansOfStudy(AcademicAdvisor advisor,List<CourseCatalog> courses) {
 	
 }
 public PlansOfStudy() {}
+@Override
+public String toString() {
+	return "PlansOfStudy [id=" + id + ", advisor=" + advisor + ", courses=" + courses + "]";
+}
 }

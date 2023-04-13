@@ -61,4 +61,9 @@ public Student(String studentCUId, String name, CurriculumMaster degree, Student
 	this.studyPlan = studyPlan;
 }
 public Student() {}
+@Override
+public String toString() {
+	return "Student [studentCUId=" + studentCUId + ", name=" + name + ", degree=" + degree + ", studentType="
+			+ studentType + ", studyPlan=" + studyPlan + "]";
+}
 }

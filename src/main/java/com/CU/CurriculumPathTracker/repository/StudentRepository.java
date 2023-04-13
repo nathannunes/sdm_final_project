@@ -14,4 +14,6 @@ public interface StudentRepository extends JpaRepository<Student,String>{
 		//	nativeQuery = true)
 	@Query("SELECT stu FROM Student AS stu JOIN PlansOfStudy AS pos on stu.studyPlan = pos.id WHERE pos.advisor.advisorCUId = :name") 
 	Optional<List<Student>> findAdvisees(@Param("name") String username);
+	
+	Student findByName(String name);
 }
