@@ -3,6 +3,7 @@ package com.CU.CurriculumPathTracker.services;
 import com.CU.CurriculumPathTracker.entity.Course;
 import com.CU.CurriculumPathTracker.entity.CourseCatalog;
 import com.CU.CurriculumPathTracker.entity.Courses;
+import com.CU.CurriculumPathTracker.enums.Concentrations;
 import com.CU.CurriculumPathTracker.repository.CourseCatalogRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,6 +34,8 @@ class CourseCatalogServiceTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
+
+
 
     @Test
     void getAll() throws JsonProcessingException {
@@ -71,4 +74,36 @@ class CourseCatalogServiceTest {
     }
 
 
+    @Test
+    void modifyCourse() {
+        CourseCatalog initCourse = new CourseCatalog();
+        initCourse.setCode("CPSC-8200");
+
+        CourseCatalog modCourse = new CourseCatalog();
+        modCourse.setCode("CPSC-8200");
+        modCourse.setCourseDescription("test desc.");
+        modCourse.setConcentration(Concentrations.VC.getValue());
+        modCourse.setName("test Name");
+
+        when(courseCatalogRepository.findCourseCatalogByCode(initCourse.getCode())).thenReturn(initCourse);
+
+        CourseCatalog expectedCourse = new CourseCatalog();
+        expectedCourse.setCode("CPSC-8200");
+        expectedCourse.setCourseDescription("test desc.");
+        expectedCourse.setConcentration("Visual Computing");
+        expectedCourse.setName("test Name");
+
+        coursesService.modifyCourse("CPSC-8200", modCourse);
+
+        assertEquals(expectedCourse.getName(), initCourse.getName() );
+        assertEquals(expectedCourse.getCourseDescription(), initCourse.getCourseDescription() );
+        assertEquals(expectedCourse.getConcentration(), initCourse.getConcentration() );
+
+
+
+    }
+
+    @Test
+    void postNewCourse() {
+    }
 }

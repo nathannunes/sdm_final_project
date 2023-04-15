@@ -1,7 +1,7 @@
 package com.CU.CurriculumPathTracker.services;
 
 
-import com.CU.CurriculumPathTracker.entity.Concentrations;
+import com.CU.CurriculumPathTracker.enums.Concentrations;
 import com.CU.CurriculumPathTracker.entity.Course;
 import com.CU.CurriculumPathTracker.entity.CourseCatalog;
 import com.CU.CurriculumPathTracker.repository.CourseCatalogRepository;
@@ -10,7 +10,10 @@ import com.CU.CurriculumPathTracker.entity.Subjects;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -24,6 +27,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class CourseCatalogService {
+
+    Logger logger = LoggerFactory.getLogger(CourseCatalogService.class);
     @Autowired
     private final CourseCatalogRepository courseCatalogRepository;
 
@@ -63,7 +68,29 @@ public class CourseCatalogService {
         return mapper.writeValueAsString(courses);
     }
 
-    public CourseCatalog postNewCourse(Map<String,String> inputJson) throws ParseException, JsonProcessingException {
+    public void modifyCourse(String code, CourseCatalog inputJson){
+        try{
+        CourseCatalog modifiedCourse = courseCatalogRepository.findCourseCatalogByCode(code);
+        if(inputJson.getConcentration() != null && !inputJson.getConcentration().isEmpty() &&
+        Concentrations.isValidConcentration(inputJson.getConcentration())) {
+            modifiedCourse.setConcentration(inputJson.getConcentration());
+        }
+        if(inputJson.getName() != null && !inputJson.getName().isEmpty()
+        && !inputJson.getName().equals("null")){
+            modifiedCourse.setName(inputJson.getName());
+        }
+        if(inputJson.getCourseDescription() != null && !inputJson.getCourseDescription().isEmpty()
+        && !inputJson.getCourseDescription().equals("null")){
+            modifiedCourse.setCourseDescription(inputJson.getCourseDescription());
+        }
+
+        courseCatalogRepository.save(modifiedCourse);
+        }catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
+    }
+
+    public ResponseEntity<?> postNewCourse(Map<String,String> inputJson) throws ParseException, JsonProcessingException {
         //  null check
         String concentrations = null;
         JSONArray jsonArray = new JSONArray();
@@ -103,8 +130,15 @@ public class CourseCatalogService {
                 jsonArray.get(2).toString());
 
         System.out.println(jsonArray.get(0).toString());
-        courseCatalogRepository.save(newCourse);
-        return newCourse;
+        try {
+            courseCatalogRepository.save(newCourse);
+            return ResponseEntity.ok().body("Course Created Successfully");
+        }catch (Exception ex){
+            logger.error(ex.toString());
+            return ResponseEntity.badRequest().body("Unable to process request");
+        }
     }
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.CU.CurriculumPathTracker.controllers;
 
 
+import com.CU.CurriculumPathTracker.entity.CourseCatalog;
 import com.CU.CurriculumPathTracker.entity.Role;
 import com.CU.CurriculumPathTracker.entity.User;
 import com.CU.CurriculumPathTracker.services.AuthenticateService;
@@ -38,22 +39,30 @@ public class CourseCatalogController {
         return courseCatalogService.getAll();
     }
 
-    @PostMapping("/modifyByCode/{code}")
-    public ResponseEntity<?> modifyByCode(@AuthenticationPrincipal User user){
+    @PostMapping("/modifyByCode")
+    public ResponseEntity<?> modifyByCode(@AuthenticationPrincipal User user, @RequestParam("code") String code,
+                                          @RequestBody CourseCatalog inputJson){
+
         //TODO : check if course doesn't exist or no User rights then throw error,
         // if exists replace subject with details in JSON
 
         try {
-            if (user.getRole().equals(Role.ADMIN)||user.getRole().equals(Role.ACAD_ADMIN)) {
+            if(code!=null && !code.isEmpty())
+                courseCatalogService.modifyCourse(code, inputJson);
+
+            //TODO user auth check
+            /*if (user.getRole().equals(Role.ADMIN)||user.getRole().equals(Role.ACAD_ADMIN)) {
                 logger.info("Starting the modification......");
 
                 return ResponseEntity.ok(true);
             } else {
                 logger.error("improper role or token is not valid");
                 return ResponseEntity.ok(false);
-            }
+            }*/
+
+            return ResponseEntity.ok(true);
         }catch (Exception ex){
-            logger.error(String.valueOf(ex));
+            logger.error(ex.getMessage());
             return ResponseEntity.ok(false);
         }
     }

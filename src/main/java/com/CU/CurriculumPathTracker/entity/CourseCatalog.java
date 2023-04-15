@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import org.hibernate.annotations.DynamicUpdate;
 
 
 import java.util.Date;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "course_catalog")
+@DynamicUpdate
 public class CourseCatalog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

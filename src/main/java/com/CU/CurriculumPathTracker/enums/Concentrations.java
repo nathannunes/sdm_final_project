@@ -1,4 +1,4 @@
-package com.CU.CurriculumPathTracker.entity;
+package com.CU.CurriculumPathTracker.enums;
 
 public enum Concentrations {
     DATA_INFO("Data Science and Informatics"),
@@ -17,6 +17,15 @@ public enum Concentrations {
 
     public String getValue() {
         return concentration;
+    }
+
+    public static boolean isValidConcentration(String conc){
+        for (Concentrations concentrations : values()) {
+            if (concentrations.getValue().equalsIgnoreCase(conc)) {
+                return true;
+            }
+        }
+        return  false;
     }
 
 }
