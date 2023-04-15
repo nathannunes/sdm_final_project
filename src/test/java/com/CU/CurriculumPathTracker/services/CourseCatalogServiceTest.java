@@ -96,8 +96,8 @@ class CourseCatalogServiceTest {
         coursesService.modifyCourse("CPSC-8200", modCourse);
         System.out.println(initCourse.getConcentration());
 
-        //assertEquals(expectedCourse.getName(), initCourse.getName() );
-        //assertEquals(expectedCourse.getCourseDescription(), initCourse.getCourseDescription() );
+        assertEquals(expectedCourse.getName(), initCourse.getName() );
+        assertEquals(expectedCourse.getCourseDescription(), initCourse.getCourseDescription() );
         assertEquals(expectedCourse.getConcentration(), initCourse.getConcentration() );
 
 
